@@ -248,8 +248,8 @@ func (this *Message) tokenStep(i int, r rune) bool {
 		// 	this.state.initDot = true
 
 		case '/':
+			this.state.tokenType = TokenLiteral
 			if this.state.prevToken.Type == TokenIPv4 {
-				this.state.tokenType = TokenLiteral
 				this.state.tokenStop = true
 			}
 
