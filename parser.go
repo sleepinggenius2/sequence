@@ -317,6 +317,9 @@ func (this *Parser) Parse(seq Sequence) (Sequence, error) {
 			for _, n := range parent.node.tc[token.Type] {
 				toVisit = append(toVisit, stackParseNode{n, parent.level + 1, parent.seqidx + 1, parent.score + fullMatchWeight, token.Value})
 			}
+			for _, n := range parent.node.tc[TokenString] {
+				toVisit = append(toVisit, stackParseNode{n, parent.level + 1, parent.seqidx + 1, parent.score + fullMatchWeight, token.Value})
+			}
 		}
 	}
 
