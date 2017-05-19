@@ -253,7 +253,7 @@ func (this *Message) tokenStep(i int, r rune) bool {
 				this.state.tokenStop = true
 			}
 
-		case '"', '\'':
+		case '"', '\'', '`':
 			this.state.tokenStop = true
 			this.state.tokenType = TokenLiteral
 			//glog.Debugf("i=%d, r=%c, inquote=%t, nxquote=%t, chquote=%c", i, r, this.state.inquote, this.state.nxquote, this.state.chquote)
@@ -265,7 +265,7 @@ func (this *Message) tokenStep(i int, r rune) bool {
 				this.state.inquote = true
 				this.state.chquote = r
 				this.state.nxquote = true
-			} else if this.state.inquote && this.state.chquote == r {
+			} else if this.state.inquote && (this.state.chquote == r || (this.state.chquote == '`' && r == '\'')) {
 				// If we are at the beginning of the data and we are inside a quote,
 				// then this is the ending quotation mark.
 				this.state.inquote = false
@@ -628,5 +628,5 @@ func isTagTokenChar(r rune) bool {
 // q - quote char in state
 // r - current char
 func matchQuote(q, r rune) bool {
-	return (((r == '"' || r == '\'') && r == q) || (r == '>' && q == '<'))
+	return (((r == '"' || r == '\'') && r == q) || (r == '>' && q == '<') || (r == '\'' && q == '`'))
 }
