@@ -48,7 +48,7 @@ timeFormats = [
 tags = [
 	"msgid:string",				# The message identifier
 	"msgtime:time",				# The timestamp that’s part of the log message
-	"severity:integer",			# The severity of the event, e.g., Emergency, …
+	"severity:string",			# The severity of the event, e.g., Emergency, …
 	"priority:integer",			# The pirority of the event
 	"apphost:string",			# The hostname of the host where the log message is generated
 	"appip:ipv4",				# The IP address of the host where the application that generated the log message is running on.
@@ -102,6 +102,7 @@ tags = [
 	[analyzer.prekeys]
 	address		= [ "srchost", "srcipv4" ]
 	by 			= [ "srchost", "srcipv4", "srcuser" ]
+	cmd 		= [ "command" ]
 	command 	= [ "command" ]
 	connection 	= [ "sessionid" ]
 	dport		= [ "dstport" ]
@@ -186,6 +187,7 @@ tags = [
 		"stop",
 		"suspend",
 		"teardown",
+		"terminate",
 		"uninstall",
 		"unlock",
 		"update",
